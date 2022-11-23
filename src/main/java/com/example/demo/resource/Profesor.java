@@ -7,6 +7,6 @@ public class Profesor {
     private Long id;
     private String nombres;
     private String apellidos;
-    private String numeroempleado;
+    private String numeroEmpleado;
     private int horasClase;
 }

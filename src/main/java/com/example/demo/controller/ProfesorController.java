@@ -19,7 +19,7 @@ public class ProfesorController {
     public ResponseEntity<?> addProfesor(@RequestBody Profesor profesor) {
 
         if(profesor.getNombres() == null || profesor.getId() == null || profesor.getApellidos() == null
-                 || profesor.getNumeroEmpleado() == null){
+             || profesor.getNumeroEmpleado() == null){
             return new ResponseEntity<>(new CustomResponse("Todos los campos son requeridos"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -43,7 +43,7 @@ public class ProfesorController {
             return new ResponseEntity<>(new CustomResponse("No se encontraron profesores"), HttpStatus.NOT_FOUND);
         }
     }
-    @GetMapping("{Id}")
+    @GetMapping("{id}")
     public ResponseEntity findProfesorById(@PathVariable Long id) {
         Profesor al = service.getProfesorById(id);
         if(al != null){
@@ -55,7 +55,7 @@ public class ProfesorController {
     @PutMapping
     public ResponseEntity updateProfesor(@RequestBody Profesor profesor) {
         if(profesor.getNombres() == null || profesor.getId() == null || profesor.getApellidos() == null
-                || profesor.getNumeroEmpleado() == null){
+              ||profesor.getHorasClase() < 0  || profesor.getNumeroEmpleado() == null){
             return new ResponseEntity<>(new CustomResponse("Todos los campos son requeridos"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -67,16 +67,16 @@ public class ProfesorController {
         if(profesor1 != null){
             return new ResponseEntity<>(profesor1, HttpStatus.OK);
         }else{
-            return new ResponseEntity<>(new CustomResponse("No se encontro alumno"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new CustomResponse("No se encontro Profesor"), HttpStatus.NOT_FOUND);
         }
     }
-    @DeleteMapping("{Id}")
+    @DeleteMapping("{id}")
     public ResponseEntity deleteProfesor(@PathVariable Long id) {
         boolean ans = service.deleteProfesor(id);
         if(ans){
             return new ResponseEntity<>( HttpStatus.OK);
         }else{
-            return new ResponseEntity<>(new CustomResponse("No se encontro alumno"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new CustomResponse("No se encontro Profesor"), HttpStatus.NOT_FOUND);
         }
     }
 
